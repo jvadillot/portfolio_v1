@@ -31,6 +31,7 @@ const Navbar = () => {
 
   return (
     <div
+    
       className={`bg-white w-full mx-auto h-20 py-4 flex justify-between items-center fixed left-0 right-0 px-8 md:px-12 transition duration-300 ease-out  ${
         visible ? "" : "-translate-y-28"
       } ${isYZero ? "shadow-lg" : ""}`}

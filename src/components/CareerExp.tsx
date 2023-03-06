@@ -1,10 +1,23 @@
 import { Career } from "../models/Career";
 import { CareerModel } from "../models/CareerModel";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CareerDetails from "./CareerDetails";
+import { useInView } from "react-intersection-observer";
+import { motion, useAnimation } from "framer-motion";
+import { fadeInScale, fadeInVariant } from "../utils/animations";
 
 const CareerExp = () => {
   const [active, setActive] = useState<number>(0);
+  const control = useAnimation();
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      control.start("visible");
+    } else {
+      control.start("hidden");
+    }
+  }, [control, inView]);
 
   const dummyDetails: Career[] = [
     {
@@ -33,15 +46,36 @@ const CareerExp = () => {
   };
   return (
     // añadir timeline
-    <div id="career" className="h-screen justify-center flex text-center flex-col">
-      <p className="text-2xl md:text-3xl lg:text-4xl font-bold py-4 md:py-10">
+    <div
+      id="career"
+      className="h-screen justify-center flex text-center flex-col"
+    >
+      <motion.p
+        variants={fadeInScale}
+        initial="hidden"
+        animate={control}
+        ref={ref}
+        className="text-2xl md:text-3xl lg:text-4xl font-bold py-4 md:py-10"
+      >
         Some background story
-      </p>
-      <h3 className="text-md text-gray-600 md:text-lg lg-text-xl py-2 px-4">
+      </motion.p>
+      <motion.h3
+        variants={fadeInVariant}
+        initial="hidden"
+        animate={control}
+        ref={ref}
+        className="text-md text-gray-600 md:text-lg lg-text-xl py-2 px-4"
+      >
         In this never ending journey that programming is, let me give you some
         details about the experiences i&apos;ve had in my career
-      </h3>
-      <div className="flex py-6 justify-center">
+      </motion.h3>
+      <motion.div
+        variants={fadeInVariant}
+        initial="hidden"
+        animate={control}
+        ref={ref}
+        className="flex py-6 justify-center"
+      >
         <div className="hidden md:block">
           <CareerDetails career={model} />
         </div>
@@ -64,15 +98,17 @@ const CareerExp = () => {
             </h4>
             <div>
               {dummyDetails[active].details.map((d, i) => (
-                <p key={i} className="py-2 text-gray-600 text-base mx-4 text-center">
+                <p
+                  key={i}
+                  className="py-2 text-gray-600 text-base mx-4 text-center"
+                >
                   {d}
                 </p>
               ))}
             </div>
-              
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
