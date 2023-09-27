@@ -5,7 +5,7 @@ const Projects = ({projects}: any) => {
 
   const projectsDummy = [{
     projectName: 'test',
-    projectDetails: 'esto es un texto muy largo capaz de contener 3500 veces su poder, todo esto para poder contemplar el poder de la card que acabo de programar, sin este texto, nada tendria sentido y el mundo tal y como lo conocemos dejaria de ser real',
+    projectDetails: 'test',
     linkTo: 'http://google.es',
   },]
 
